@@ -23,3 +23,16 @@ export const registerValidation = [
     .withMessage('El nombre es requerido')
     .trim()
 ];
+
+export const refreshTokenValidation = [
+  body('refreshToken')
+    .notEmpty()
+    .withMessage('El refresh token es requerido')
+];
+
+export const logoutValidation = [
+  body('refreshToken')
+    .optional()
+    .notEmpty()
+    .withMessage('El refresh token no puede estar vacío')
+];

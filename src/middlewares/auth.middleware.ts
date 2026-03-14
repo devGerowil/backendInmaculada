@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyToken, JwtPayload } from '../utils/jwt';
+import { verifyAccessToken, JwtPayload } from '../utils/jwt';
 
 export interface AuthRequest extends Request {
   user?: JwtPayload;
@@ -25,7 +25,7 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
       });
     }
     
-    const decoded = verifyToken(token);
+    const decoded = verifyAccessToken(token);
     req.user = decoded;
     
     next();

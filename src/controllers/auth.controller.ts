@@ -26,6 +26,51 @@ export class AuthController {
     }
   }
 
+  async refreshToken(req: Request, res: Response): Promise<Response> {
+    try {
+      const { refreshToken } = req.body;
+
+      if (!refreshToken) {
+        return res.status(400).json({
+          success: false,
+          error: 'Refresh token es requerido'
+        });
+      }
+
+      const result = await this.authService.refreshToken(refreshToken);
+
+      return res.status(200).json({
+        success: true,
+        data: result
+      });
+    } catch (error: any) {
+      return res.status(401).json({
+        success: false,
+        error: error.message
+      });
+    }
+  }
+
+  async logout(req: Request, res: Response): Promise<Response> {
+    try {
+      const { refreshToken } = req.body;
+
+      if (refreshToken) {
+        await this.authService.logout(refreshToken);
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: 'Logout exitoso'
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      });
+    }
+  }
+
   async register(req: Request, res: Response): Promise<Response> {
     try {
       const { email, password, name } = req.body;
