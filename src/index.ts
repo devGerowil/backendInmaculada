@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
+import authRoutes from './routes/auth.routes';
 
 dotenv.config();
 
@@ -14,7 +15,8 @@ app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Backend API is running' });
 });
 
-app.use(userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api', userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

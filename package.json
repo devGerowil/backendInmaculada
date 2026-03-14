@@ -13,11 +13,16 @@
   "description": "Backend project with Express, TypeScript and Supabase",
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
+    "bcrypt": "^6.0.0",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.10.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.2"

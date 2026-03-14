@@ -1,11 +1,11 @@
+import { supabaseAdmin } from './../config/supabase';
 import { Request, Response } from 'express';
-import { supabase } from '../config/supabase';
 import { User, UserInput } from '../models/User';
 
 export class UserController {
   async getAll(req: Request, res: Response): Promise<Response> {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('users')
         .select('*')
         .order('created_at', { ascending: false });
@@ -22,7 +22,7 @@ export class UserController {
     try {
       const { id } = req.params;
 
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('users')
         .select('*')
         .eq('id', id)
@@ -43,7 +43,6 @@ export class UserController {
   async create(req: Request, res: Response): Promise<Response> {
     try {
       const userInput: UserInput = req.body;
-
       if (!userInput.email || !userInput.name) {
         return res.status(400).json({ 
           success: false, 
@@ -51,7 +50,7 @@ export class UserController {
         });
       }
 
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('users')
         .insert([userInput])
         .select()
@@ -64,13 +63,12 @@ export class UserController {
       return res.status(500).json({ success: false, error: error.message });
     }
   }
-
   async update(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      const userInput: Partial<UserInput> = req.body;
+      const userInput: Partial <UserInput>= req.body;
 
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('users')
         .update(userInput)
         .eq('id', id)
@@ -93,7 +91,7 @@ export class UserController {
     try {
       const { id } = req.params;
 
-      const { error } = await supabase
+      const { error } = await supabaseAdmin
         .from('users')
         .delete()
         .eq('id', id);
