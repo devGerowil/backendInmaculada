@@ -3,6 +3,8 @@ export interface User {
   email: string;
   name: string;
   password?: string;
+  google_id?: string;
+  picture?: string;
   created_at?: string;
   updated_at?: string;
 }
@@ -11,4 +13,6 @@ export interface UserInput {
   email: string;
   name: string;
   password?: string;
+  google_id?: string;
+  picture?: string;
 }
